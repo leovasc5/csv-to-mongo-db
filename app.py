@@ -1,5 +1,5 @@
 import os, time, sys, inspect
-from model.database import createBase, consulta
+from model.database import createBase, consulta, insercao
 
 os.system('cls')
 try:
@@ -12,3 +12,4 @@ except:
 
 createBase() if key == 1 else None
 consulta() if key == 2 else None
+insercao() if key == 3 else None

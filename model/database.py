@@ -108,3 +108,82 @@ def consulta():
         print('\nNenhuma base encontrada\nTente novamente...')
         time.sleep(2)
         consulta()
+
+def insercao():
+    os.system('cls')
+    nomeHost = input('Nome do host: ')
+    porta = int(input('Porta do host: '))
+
+    try:
+        if 1 == 1:
+            client = MongoClient(nomeHost, porta)
+            print('Procurando...\nAguarde, isso pode demorar um pouco...')
+            os.system('cls')
+            print('Escolha uma das bases de dados encontradas: ')
+            bases = client.list_database_names()
+            n = 0
+
+            for i in bases:
+                print(str(n+1)+ ' - ' + i)
+                n+=1
+
+            try:
+                key = int(input('\nUser: '))
+            except:
+                print('\nErro, entrada inválida\nTente novamente...')
+                time.sleep(2)
+                consulta()
+
+            if (key <= 0) or (key > (len(bases)+1)):
+                print('\nErro, entrada inválida\nTente novamente...')
+                time.sleep(2)
+                consulta()
+
+            os.system('cls')
+            colecoes = client[bases[key-1]].collection_names()
+            n = 0
+
+            for i in colecoes:
+                print(str(n+1) + ' - ' + i + '\n')
+                n+=1
+
+            try:
+                key2 = int(input('Escolha a coleção: '))
+            except:
+                print('\nErro, entrada inválida\nTente novamente...')
+                time.sleep(2)
+                insercao()
+
+            if (key2 <= 0) or (key2 > (len(colecoes)+1)):
+                print('\nErro, entrada inválida\nTente novamente...')
+                time.sleep(2)
+                insercao()
+
+            print('Base escolhida: ' + colecoes[key2-1])
+            print(client[bases[key-1]][colecoes[key2-1]])
+            query = input('\nQuery: ')
+
+            try:
+                client[bases[key-1]][colecoes[key2-1]].insert(json.loads(query))
+                os.system('cls')
+                print("\nDocumento inserido com sucesso!")
+                again = int(input('\n1 - Inserir mais um documento \n2 - Encerrar o processo \n\nUser: '))
+                if again == 1:
+                    insercao()
+                else:
+                    os.system('cls')
+                    print('Volte sempre! :)')
+                    time.sleep(3)
+                    exit()
+
+            except:
+                os.system('cls')
+                print('Não foi possível realizar a query :(')
+                print('\nTente novamente...')
+                time.sleep(3)
+                insercao()
+
+    except:
+        print('\nNenhuma base encontrada\nTente novamente...')
+        time.sleep(2)
+        insercao()
