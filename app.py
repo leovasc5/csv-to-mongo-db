@@ -1,5 +1,5 @@
 import os, time, sys, inspect
-from model.database import createBase
+from model.database import createBase, consulta
 
 os.system('cls')
 try:
@@ -11,3 +11,4 @@ except:
     sys.exit()
 
 createBase() if key == 1 else None
+consulta() if key == 2 else None
