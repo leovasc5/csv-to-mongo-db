@@ -1,5 +1,6 @@
 import os, time, sys
 from pymongo import MongoClient
+from model.planilha import transferirDados
 
 def createBase():
     os.system('cls')
@@ -18,5 +19,8 @@ def createBase():
 
     os.system('cls')
     nomeBase = input('Nome da nova base de dados: ')
+    nomeColecao = input('Nome da coleção onde serão armazenados os dados: ')
+    caminho = input('Caminho para a planilha: ')
+    separador = input('Caractere separador da planilha: ')
     
-        
+    transferirDados(client, nomeBase, nomeColecao, caminho, separador)
