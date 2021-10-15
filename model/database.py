@@ -125,6 +125,19 @@ def action(mode):
                         print('Volte sempre! :)')
                         time.sleep(3)
                         exit()
+                elif mode == 5:
+                    query = input('\nQuery: ')
+                    client[bases[key-1]][colecoes[key2-1]].remove(json.loads(query))
+                    os.system('cls')
+                    print("\nDocumento removido com sucesso!")
+                    again = int(input('\n1 - Remover mais um documento \n2 - Encerrar o processo \n\nUser: '))
+                    if again == 1:
+                        action(key)
+                    else:
+                        os.system('cls')
+                        print('Volte sempre! :)')
+                        time.sleep(3)
+                        exit()
 
             except:
                 os.system('cls')
@@ -137,4 +150,3 @@ def action(mode):
         print('\nNenhuma base encontrada\nTente novamente...')
         time.sleep(2)
         action(mode)
-

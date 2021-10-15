@@ -11,4 +11,5 @@ except:
     sys.exit()
 
 createBase() if key == 1 else None
-action(key) if key >= 2 and key <= 6 else None
+exit() if key == 6 else None
+action(key) if key >= 2 and key <= 5 else None
