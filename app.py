@@ -3,7 +3,7 @@ from model.database import createBase, action
 
 os.system('cls')
 try:
-    key = int(input('Escolha uma opção: \n1 - Criar Base \n2 - Realizar Consulta \n3 - Realizar Inserção \n4 - Realizar Atualização (via ID) \n5 - Realizar Remoção\n6 - Sair\n\nUser: '))
+    key = int(input('Escolha uma opção: \n1 - Criar Base \n2 - Realizar Consulta \n3 - Realizar Inserção \n4 - Realizar Atualização \n5 - Realizar Remoção\n6 - Sair\n\nUser: '))
 except:
     print('Ocorreu um erro\nO App será reiniciado')
     time.sleep(2)

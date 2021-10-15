@@ -80,10 +80,10 @@ def action(mode):
 
             print('Base escolhida: ' + colecoes[key2-1])
             print(client[bases[key-1]][colecoes[key2-1]])
-            query = input('\nQuery: ')
 
             try:
                 if mode == 2:
+                    query = input('\nQuery: ')
                     res = client[bases[key-1]][colecoes[key2-1]].find(json.loads(query))
                     os.system('cls')
                     for i in res:
@@ -98,10 +98,26 @@ def action(mode):
                         time.sleep(3)
                         exit()
                 elif mode == 3:
+                    query = input('\nQuery: ')
                     client[bases[key-1]][colecoes[key2-1]].insert(json.loads(query))
                     os.system('cls')
                     print("\nDocumento inserido com sucesso!")
                     again = int(input('\n1 - Inserir mais um documento \n2 - Encerrar o processo \n\nUser: '))
+                    if again == 1:
+                        action(key)
+                    else:
+                        os.system('cls')
+                        print('Volte sempre! :)')
+                        time.sleep(3)
+                        exit()
+                elif mode == 4:
+                    os.system('cls')
+                    doc = input('Escreva a query identificadora: ')
+                    val = input('\nEscreva a query com os novos valores: ')
+                    client[bases[key-1]][colecoes[key2-1]].update(json.loads(doc), json.loads(val))
+                    os.system('cls')
+                    print("\nDocumento atualizado com sucesso!")
+                    again = int(input('\n1 - Atualizar mais um documento \n2 - Encerrar o processo \n\nUser: '))
                     if again == 1:
                         action(key)
                     else:
@@ -121,3 +137,4 @@ def action(mode):
         print('\nNenhuma base encontrada\nTente novamente...')
         time.sleep(2)
         action(mode)
+
