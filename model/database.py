@@ -1,4 +1,3 @@
-from json.encoder import JSONEncoder
 import os, time, json
 from pymongo import MongoClient
 from pprint import pprint
@@ -22,11 +21,10 @@ def createBase():
 
     os.system('cls')
     nomeBase = input('Nome da nova base de dados: ')
-    nomeColecao = input('Nome da coleção onde serão armazenados os dados: ')
     caminho = input('Caminho para a planilha: ')
     separador = input('Caractere separador da planilha: ')
     
-    transferirDados(client, nomeBase, nomeColecao, caminho, separador)
+    transferirDados(client, nomeBase, caminho, separador)
 
 def action(mode):
     os.system('cls')
