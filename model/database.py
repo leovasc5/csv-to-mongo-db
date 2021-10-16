@@ -95,20 +95,20 @@ def action(mode, passDirect = None):
                 os.system('cls')
                 print('Volte sempre! :)')
                 time.sleep(3)
-                exit()
+                menu()
         elif mode == 3:
-                query = input('\nQuery: ')
-                client[bases[key-1]][colecoes[key2-1]].insert(json.loads(query))
+            query = input('\nQuery: ')
+            client[bases[key-1]][colecoes[key2-1]].insert(json.loads(query))
+            os.system('cls')
+            print("\nDocumento inserido com sucesso!")
+            again = int(input('\n1 - Inserir mais um documento \n2 - Encerrar o processo \n\nUser: '))
+            if again == 1:
+                action(key, True)
+            else:
                 os.system('cls')
-                print("\nDocumento inserido com sucesso!")
-                again = int(input('\n1 - Inserir mais um documento \n2 - Encerrar o processo \n\nUser: '))
-                if again == 1:
-                    action(key, True)
-                else:
-                    os.system('cls')
-                    print('Volte sempre! :)')
-                    time.sleep(3)
-                    exit()
+                print('Volte sempre! :)')
+                time.sleep(3)
+                menu()
         elif mode == 4:
             os.system('cls')
             doc = input('Escreva a query identificadora: ')
@@ -123,7 +123,7 @@ def action(mode, passDirect = None):
                 os.system('cls')
                 print('Volte sempre! :)')
                 time.sleep(3)
-                exit()
+                menu()
         elif mode == 5:
             query = input('\nQuery: ')
             client[bases[key-1]][colecoes[key2-1]].remove(json.loads(query))
@@ -136,11 +136,11 @@ def action(mode, passDirect = None):
                 os.system('cls')
                 print('Volte sempre! :)')
                 time.sleep(3)
-                exit()
+                menu()
     except:
-        print('\nNenhuma base encontrada\nTente novamente...')
+        print('Algo na sua query está errado\nTente novamente...')
         time.sleep(2)
-        action(mode)
+        action(mode, True)
 
 def connect(mode):
     try:
@@ -153,7 +153,20 @@ def connect(mode):
         return(cl)
     except:
         os.system('cls')
-        key = input('Algo deu errado...\n Tentar novamente? [s] Sim | [n] Não \nUser:')
+        key = input('Algo deu errado...\n Tentar novamente? [s] Sim | [n] Não \nUser: ')
         if key == 's':
             createBase() if mode == 1 else None
             action(mode) if mode >= 2 and key <= 5 else None
+
+def menu():
+    os.system('cls')
+    try:
+        key = int(input('Escolha uma opção: \n1 - Criar Base \n2 - Realizar Consulta \n3 - Realizar Inserção \n4 - Realizar Atualização \n5 - Realizar Remoção\n6 - Sair\n\nUser: '))
+    except:
+        print('Ocorreu um erro\nO App será reiniciado')
+        time.sleep(2)
+        os.startfile('../app.py')
+
+    createBase() if key == 1 else None
+    os._exit() if key == 6 else None
+    action(key, True) if key >= 2 and key <= 5 else None
