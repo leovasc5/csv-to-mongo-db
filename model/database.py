@@ -4,8 +4,10 @@ from pprint import pprint
 
 from model.planilha import transferirDados
 
-def createBase():
-    client = connect(1)
+def createBase(passDirect = None):
+    if passDirect == None:
+        global client
+        client = connect(1)
 
     try:
         print('\Bancos de dados encontrados: ')
@@ -17,10 +19,15 @@ def createBase():
 
     os.system('cls')
     nomeBase = input('Nome da nova base de dados: ')
-    caminho = input('Caminho para a planilha: ')
-    separador = input('Caractere separador da planilha: ')
+    if client[nomeBase].collection_names() == []:
+        caminho = input('Caminho para a planilha: ')
+        separador = input('Caractere separador da planilha: ')
     
-    transferirDados(client, nomeBase, caminho, separador)
+        transferirDados(client, nomeBase, caminho, separador)
+    else:
+        input('O nome já está em uso! \nPressione alguma tecla para tentar com outro nome: ')
+        createBase(True)
+    
 
 def action(mode, passDirect = None):
     if passDirect == None:

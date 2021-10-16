@@ -34,6 +34,7 @@ def transferirDados(client, nomeBase, caminho, separador):
             time.sleep(2)
             exit()
     else:
+        input("\nPressione alguma tecla para continuar...")
         os.system('cls')
         key = int(input("Foi encontrada colunas 'separadoras' dentro da planilha. \n1 - Ignorar colunas vazias e criar base de dados com apenas uma coleção \n2 - Inserir cada parte dividida dentro de uma nova coleção \nUser: "))
         if key == 1:
