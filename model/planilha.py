@@ -29,6 +29,9 @@ def transferirDados(client, nomeBase, caminho, separador):
                 db[nomeColecao].insert(file_data)
                 os.system('cls')
                 client.close()
+            os.remove("assets/temp.json")
+            print('\nTransferência realizada com sucesso! \nAté a próxima :)')
+
         else:
             print('\nTransferência cancelada...\nAté a próxima :)')
             time.sleep(2)
